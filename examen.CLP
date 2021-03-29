@@ -1,13 +1,29 @@
 (deffacts datos (valor 5 3 8 14 7)
 (numero magico 21)
-(calculo 0 respuesta 0)
+(respuesta 0)
 )
 
 (defrule resta
 (valor $?rest ?x $?rest2 ?y $?rest3)
-
-(calculo $?b respuesta $?a ?c $?d)
-(test (< ?x ?y))
+(respuesta $?a)
 =>
-(assert (calculo $?b ?y - ?x respuesta(
-(assert (valor $?rest $?rest2 $?rest3)
+(assert (respuesta $?a (- (max ?x ?y) (min ?x ?y)) 
+(assert (valor $?rest $?rest2 $?rest3)))
+
+(defrule suma
+(valor $?rest ?x $?rest2 ?y $?rest3)
+(respuesta $?a)
+=>
+(assert (respuesta $?a (+ ?x ?y))
+(assert (valor $?rest $?rest2 $?rest3)))
+
+(defrule multiplica
+(valor $?rest ?x $?rest2 ?y $?rest3)
+(respuesta $?a)
+=>
+(assert (respuesta $?a (* ?x ?y))
+(assert (valor $?rest $?rest2 $?rest3)))
+
+
+
+
